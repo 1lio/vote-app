@@ -9,8 +9,6 @@ import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.server.netty.*
 import io.ktor.util.*
-import java.io.File
-import java.util.*
 
 val gson: Gson = GsonBuilder().setPrettyPrinting().create()
 
@@ -63,8 +61,6 @@ fun Application.module() {
         get("/get") {
             call.sendHttpBinResponse()
         }
-
-
     }
-}
 
+}
