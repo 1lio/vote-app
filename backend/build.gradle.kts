@@ -3,12 +3,23 @@ plugins {
     kotlin("jvm")
 }
 
+sourceSets {
+    main {
+        java.srcDir("src/main/kotlin")
+        resources.srcDir("src/main/resources")
+    }
+
+    test {
+        java.srcDir("src/test/kotlin")
+        resources.srcDir("src/test/resources")
+    }
+}
+
 application {
     mainClassName = "io.ktor.server.netty.EngineMain"
 }
 
 dependencies {
-
     implementation(kotlin("stdlib-jdk8"))
 
     implementation(Config.Libs.Ktor.serverNetty)
