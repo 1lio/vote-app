@@ -69,7 +69,7 @@ object Config {
             const val clientCoreJVM = "io.ktor:ktor-client-core-jvm:$ktorVer"
             const val clientLoggingJVM = "io.ktor:ktor-client-logging-jvm:$ktorVer"
 
-            const val tests = "io.ktor:ktor-server-tests:$ktorVer"
+            const val serverTests = "io.ktor:ktor-server-tests:$ktorVer"
 
             const val logbackClassic = "ch.qos.logback:logback-classic:1.2.3"
         }
