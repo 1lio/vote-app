@@ -72,6 +72,9 @@ object Config {
 
             const val serverTests = "io.ktor:ktor-server-tests:$ktorVer"
 
+            // https://github.com/InsertKoinIO/koin
+            const val koinKtor = "org.koin:koin-ktor:2.2.0"
+
             const val logbackClassic = "ch.qos.logback:logback-classic:1.2.3"
         }
 
@@ -103,6 +106,14 @@ object Config {
 
         object Misc {
             const val hawk = "com.orhanobut:hawk:2.0.1"
+
+            //https://github.com/aPureBase/KGraphQL
+            const val graphql = "com.apurebase:kgraphql:0.16.0"
+        }
+
+        object DB {
+            // http://litote.org/kmongo/
+            const val mongoCoroutines = "org.litote.kmongo:kmongo:4.1.3"
         }
 
         object Test {
