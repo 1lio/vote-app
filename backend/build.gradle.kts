@@ -28,10 +28,11 @@ dependencies {
     implementation(Config.Libs.Ktor.gson)
     implementation(Config.Libs.Ktor.htmlBuilder)
     implementation(Config.Libs.Ktor.logbackClassic)
-    testImplementation(Config.Libs.Ktor.serverTests)
+    implementation(Config.Libs.Ktor.locations)
 
     implementation(Config.Libs.Ktor.koinKtor)
     implementation(Config.Libs.Misc.graphql)
-
     implementation(Config.Libs.DB.mongoCoroutines)
+
+    testImplementation(Config.Libs.Ktor.serverTests)
 }
