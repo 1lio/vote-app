@@ -15,6 +15,8 @@ dependencies {
     implementation(Config.Libs.Ktor.auth)
     implementation(Config.Libs.Ktor.gson)
 
+    implementation(Config.Libs.Ktor.htmlBuilder)
+
     implementation(Config.Libs.Ktor.logbackClassic)
 
     testImplementation(Config.Libs.Ktor.serverTests)
