@@ -64,6 +64,7 @@ object Config {
             const val auth = "io.ktor:ktor-auth:$ktorVer"
             const val authJWT = "io.ktor:ktor-auth-jwt:$ktorVer"
             const val gson = "io.ktor:ktor-gson:$ktorVer"
+            const val htmlBuilder = "io.ktor:ktor-html-builder:$ktorVer"
 
             const val clientCore = "io.ktor:ktor-client-core:$ktorVer"
             const val clientCoreJVM = "io.ktor:ktor-client-core-jvm:$ktorVer"
