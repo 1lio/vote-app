@@ -73,7 +73,7 @@ object Config {
             const val serverTests = "io.ktor:ktor-server-tests:$ktorVer"
 
             // https://github.com/InsertKoinIO/koin
-            const val koinKtor = "org.koin:koin-ktor:2.2.0"
+            const val koinKtor = "org.koin:koin-ktor:2.1.0"
 
             const val logbackClassic = "ch.qos.logback:logback-classic:1.2.3"
         }
