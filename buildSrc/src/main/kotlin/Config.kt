@@ -112,13 +112,13 @@ object Config {
         }
 
         object DB {
-            //private const val kmongoVer = "4.1.3"
-            private const val kmongoVer = "3.12.0"
+            private const val kmongoVer = "4.2.0"
 
             // http://litote.org/kmongo/
-            const val mongoSync = "org.litote.kmongo:kmongo:$kmongoVer"         // Синхронный
-            const val mongoAsync = "org.litote.kmongo:kmongo-async:$kmongoVer"  // Асинхронный (Java Stream)
-            const val mongoCoroutines = "org.litote.kmongo:kmongo:$kmongoVer"   // С карутинами
+            const val kMongo = "org.litote.kmongo:kmongo:$kmongoVer"                      // Синхронный
+            const val kMongoAsync = "org.litote.kmongo:kmongo-async:$kmongoVer"           // Асинхронный (Java Stream)
+            const val kMongoCoroutines = "org.litote.kmongo:kmongo-coroutine:$kmongoVer"  // С карутинами
+            const val kMongoRxJava = "org.litote.kmongo:kmongo-rxjava2:$kmongoVer"        // С RxJava
         }
 
         object Test {
