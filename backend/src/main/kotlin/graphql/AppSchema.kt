@@ -89,16 +89,14 @@ class AppSchema {
 
         suspend fun delUser(decodedJWT: DecodedJWT, user: String): String {
             return if (decodedJWT.issuer == "admin") {
-
                 val deleteResult = client.getDatabase("Account")
                     .getCollection<LoginRegister>("LoginRegister")
-                    .deleteOne(LoginRegister::userName eq user)
+                    .deleteOne(LoginRegister::username eq user)
                 if (deleteResult.wasAcknowledged()) "You've deleted $user on the database" else "$user failed to delete on the database"
             } else {
                 "Unauthorized Request."
             }
         }
-
 
         query("deleteUser") {
 

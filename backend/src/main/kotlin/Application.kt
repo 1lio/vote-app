@@ -46,7 +46,11 @@ fun Application.module() {
         }
     }
 
-    install(ContentNegotiation) { gson { setPrettyPrinting() } }
+    install(ContentNegotiation) {
+        gson {
+            setPrettyPrinting()
+        }
+    }
 
     install(Locations)
 
@@ -61,13 +65,13 @@ fun Application.module() {
         suspend fun getLoginRegister(call: ApplicationCall): LoginRegister {
             val post = call.receive<LoginRegister>()
             return LoginRegister(
-                gson.fromJson(post.userName, String::class.java),
+                gson.fromJson(post.username, String::class.java),
                 gson.fromJson(post.password, String::class.java)
             )
         }
 
         suspend fun setNewLoginRegister(call: ApplicationCall, login: LoginRegister) {
-            clientLoginRegister().findOne(LoginRegister::userName eq login.userName)?.let {
+            clientLoginRegister().findOne(LoginRegister::username eq login.username)?.let {
                 call.respond(HttpStatusCode.BadRequest, "This username already exist!")
                 return@setNewLoginRegister
             }
@@ -75,10 +79,12 @@ fun Application.module() {
             clientLoginRegister().insertOne(login)
         }
 
-         fun respondLoginRegister(loginRegister: LoginRegister): Triple<String, String, String> {
-            val newToken = myJWT.sign(loginRegister.userName)
-            val id = loginRegister.id!!
-            val userName = loginRegister.userName
+        suspend fun respondLoginRegister(loginRegister: LoginRegister): Triple<String, String, String> {
+            val newToken = myJWT.sign(loginRegister.username)
+            val loginRegisterObject =
+                clientLoginRegister().findOne(gson.toJson(mapOf("username" to loginRegister.username)))
+            val id = loginRegisterObject!!.id!!
+            val userName = loginRegister.username
             return Triple(newToken, id, userName)
         }
 
@@ -103,8 +109,8 @@ fun Application.module() {
 
             val loginRegister = getLoginRegister(call)
             val hasMatch = clientLoginRegister().findOne(
-                LoginRegister::userName eq loginRegister.userName,
-                LoginRegister::password eq loginRegister::password
+                LoginRegister::username eq loginRegister.username,
+                LoginRegister::password eq loginRegister.password
             )
 
             if (hasMatch != null) {
