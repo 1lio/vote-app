@@ -56,6 +56,8 @@ fun Application.module() {
 
     routing {
 
+        static("/") { default("/static/index.html") }
+
         val appSchema: AppSchema by inject()
         val gson: Gson by inject()
         val client = KMongo.createClient(DB_HOST).coroutine
@@ -127,8 +129,5 @@ fun Application.module() {
         }
 
         graphql(log, gson, appSchema.schema)
-
-        static("/") { default("index.html") }
     }
-
 }
