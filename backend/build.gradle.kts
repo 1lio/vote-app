@@ -3,6 +3,13 @@ plugins {
     kotlin("jvm")
 }
 
+// Or in IDEA Settings > Kotlin compiler (1.6 -> 1.8)
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
 sourceSets {
     main {
         java.srcDir("src/main/kotlin")
@@ -23,16 +30,18 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
     implementation(Config.Libs.Ktor.serverNetty)
+    implementation(Config.Libs.Ktor.serverCore)
     implementation(Config.Libs.Ktor.auth)
     implementation(Config.Libs.Ktor.authJWT)
     implementation(Config.Libs.Ktor.gson)
     implementation(Config.Libs.Ktor.htmlBuilder)
-    implementation(Config.Libs.Ktor.logbackClassic)
     implementation(Config.Libs.Ktor.locations)
-
     implementation(Config.Libs.Ktor.koinKtor)
     implementation(Config.Libs.Misc.graphql)
-    implementation(Config.Libs.DB.mongoCoroutines)
+    implementation(Config.Libs.DB.kMongo)
+    implementation(Config.Libs.DB.kMongoCoroutines)
+
+    implementation(Config.Libs.Ktor.logbackClassic)
 
     testImplementation(Config.Libs.Ktor.serverTests)
 }
