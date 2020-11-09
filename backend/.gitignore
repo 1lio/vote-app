@@ -6,3 +6,5 @@
 *.ipr
 *.iws
 gradle.tmp
+
+/src/main/kotlin/utils/AppConstants.kt
