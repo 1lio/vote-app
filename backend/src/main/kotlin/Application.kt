@@ -23,6 +23,7 @@ import utils.Constants.DB_HOST
 import utils.appModule
 import org.litote.kmongo.coroutine.*
 import org.litote.kmongo.reactivestreams.*
+import utils.Constants.SECRET_KEY
 
 val gson: Gson = GsonBuilder().setPrettyPrinting().create()
 
@@ -33,7 +34,7 @@ fun Application.module() {
 
     startKoin { modules(appModule) }
 
-    val myJWT = MyJWT("samplesecretkey")
+    val myJWT = MyJWT(SECRET_KEY)
 
     install(Authentication) {
 
@@ -74,13 +75,10 @@ fun Application.module() {
             clientLoginRegister().insertOne(login)
         }
 
-        suspend fun respondLoginRegister(loginRegister: LoginRegister): Triple<String, String, String> {
-
+         fun respondLoginRegister(loginRegister: LoginRegister): Triple<String, String, String> {
             val newToken = myJWT.sign(loginRegister.userName)
-           // val loginRegisterObject = clientLoginRegister().findOne(gson.toJson(mapOf("username" to loginRegister.userName)))
             val id = loginRegister.id!!
             val userName = loginRegister.userName
-
             return Triple(newToken, id, userName)
         }
 
@@ -124,9 +122,7 @@ fun Application.module() {
 
         graphql(log, gson, appSchema.schema)
 
-        static("/") {
-            default("index.html")
-        }
+        static("/") { default("index.html") }
     }
 
 }
