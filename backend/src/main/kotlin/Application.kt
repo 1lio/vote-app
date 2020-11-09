@@ -16,19 +16,19 @@ import io.ktor.routing.*
 import io.ktor.server.netty.*
 import model.LoginRegister
 import model.MyJWT
-import org.bson.Document
 import org.koin.core.context.startKoin
 import org.koin.ktor.ext.inject
-import org.litote.kmongo.KMongo
 import org.litote.kmongo.eq
-import org.litote.kmongo.findOne
+import utils.Constants.DB_HOST
 import utils.appModule
+import org.litote.kmongo.coroutine.*
+import org.litote.kmongo.reactivestreams.*
 
 val gson: Gson = GsonBuilder().setPrettyPrinting().create()
 
 fun main(args: Array<String>): Unit = EngineMain.main(args)
 
-@Suppress("unused")
+@Suppress("unused", "AuthLeak")
 fun Application.module() {
 
     startKoin { modules(appModule) }
@@ -53,9 +53,9 @@ fun Application.module() {
 
         val appSchema: AppSchema by inject()
         val gson: Gson by inject()
-        val client = KMongo.createClient("mongodb+srv://john:1234@cluster0-vhryk.gcp.mongodb.net/test")
+        val client = KMongo.createClient(DB_HOST).coroutine
 
-        fun clientLoginRegister() = client.getDatabase("Account").getCollection("LoginRegister")
+        fun clientLoginRegister() = client.getDatabase("vote").getCollection<LoginRegister>("LoginRegister")
 
         suspend fun getLoginRegister(call: ApplicationCall): LoginRegister {
             val post = call.receive<LoginRegister>()
@@ -71,14 +71,13 @@ fun Application.module() {
                 return@setNewLoginRegister
             }
 
-            clientLoginRegister().insertOne(login as Document)
+            clientLoginRegister().insertOne(login)
         }
 
         suspend fun respondLoginRegister(loginRegister: LoginRegister): Triple<String, String, String> {
 
             val newToken = myJWT.sign(loginRegister.userName)
-            val loginRegisterObject =
-                clientLoginRegister().findOne(gson.toJson(mapOf("username" to loginRegister.userName)))
+           // val loginRegisterObject = clientLoginRegister().findOne(gson.toJson(mapOf("username" to loginRegister.userName)))
             val id = loginRegister.id!!
             val userName = loginRegister.userName
 
