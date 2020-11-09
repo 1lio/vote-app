@@ -6,14 +6,15 @@ import com.auth0.jwt.exceptions.JWTDecodeException
 import com.auth0.jwt.interfaces.DecodedJWT
 import model.LoginRegister
 import model.Session
-import org.litote.kmongo.KMongo
+import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.eq
-import org.litote.kmongo.findOne
-import org.litote.kmongo.getCollection
+import org.litote.kmongo.reactivestreams.KMongo
+import utils.Constants.DB_HOST
 import java.util.*
 
 class AppSchema {
-    private val client = KMongo.createClient("mongodb+srv://john:1234@cluster0-vhryk.gcp.mongodb.net/test")
+
+    private val client = KMongo.createClient(DB_HOST).coroutine
 
     val schema = KGraphQL.schema {
 
