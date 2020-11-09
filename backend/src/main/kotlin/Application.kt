@@ -19,11 +19,11 @@ import model.MyJWT
 import org.koin.core.context.startKoin
 import org.koin.ktor.ext.inject
 import org.litote.kmongo.eq
-import utils.Constants.DB_HOST
+import utils.AppConstants.DB_HOST
 import utils.appModule
 import org.litote.kmongo.coroutine.*
 import org.litote.kmongo.reactivestreams.*
-import utils.Constants.SECRET_KEY
+import utils.AppConstants.SECRET_KEY
 
 val gson: Gson = GsonBuilder().setPrettyPrinting().create()
 

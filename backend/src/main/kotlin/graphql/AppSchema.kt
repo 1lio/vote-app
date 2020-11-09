@@ -9,7 +9,7 @@ import model.Session
 import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.eq
 import org.litote.kmongo.reactivestreams.KMongo
-import utils.Constants.DB_HOST
+import utils.AppConstants.DB_HOST
 import java.util.*
 
 class AppSchema {
