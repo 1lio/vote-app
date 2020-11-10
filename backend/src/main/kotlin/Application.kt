@@ -60,7 +60,7 @@ fun Application.module() {
         val gson: Gson by inject()
         val client = KMongo.createClient(DB_HOST).coroutine
 
-        fun clientLoginRegister() = client.getDatabase("vote").getCollection<LoginRegister>("LoginRegister")
+        fun clientLoginRegister() = client.getDatabase("Vote").getCollection<LoginRegister>("LoginRegister")
 
         suspend fun getLoginRegister(call: ApplicationCall): LoginRegister {
             val post = call.receive<LoginRegister>()

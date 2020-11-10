@@ -31,16 +31,14 @@ class AppSchema {
             }
         }
 
-
         suspend fun isTokenActive(decodedJWT: DecodedJWT): Boolean {
-            val tokenFound = client.getDatabase("Account")
+            val tokenFound = client.getDatabase("Vote")
                 .getCollection<Session>("Session")
                 .findOne(Session::token eq decodedJWT.token)
             return tokenFound == null
         }
 
         query("search") {
-
             description = "return some database"
 
             resolver { token: String, query: String ->
@@ -65,7 +63,7 @@ class AppSchema {
         }
 
         suspend fun addSession(decodedJWT: DecodedJWT) {
-            client.getDatabase("Account")
+            client.getDatabase("Vote")
                 .getCollection<Session>("Session")
                 .insertOne(Session(username = decodedJWT.issuer, token = decodedJWT.token))
         }
@@ -89,7 +87,7 @@ class AppSchema {
 
         suspend fun delUser(decodedJWT: DecodedJWT, user: String): String {
             return if (decodedJWT.issuer == "admin") {
-                val deleteResult = client.getDatabase("Account")
+                val deleteResult = client.getDatabase("Vote")
                     .getCollection<LoginRegister>("LoginRegister")
                     .deleteOne(LoginRegister::username eq user)
                 if (deleteResult.wasAcknowledged()) "You've deleted $user on the database" else "$user failed to delete on the database"
@@ -111,7 +109,6 @@ class AppSchema {
                     else "This session is expired. Sign in again!"
 
                 } else newUser(token)
-
 
             }
 
