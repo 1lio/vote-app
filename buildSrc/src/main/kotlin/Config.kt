@@ -76,6 +76,7 @@ object Config {
             const val koinKtor = "org.koin:koin-ktor:2.1.0"
 
             const val logbackClassic = "ch.qos.logback:logback-classic:1.2.3"
+            const val hostCommon = "io.ktor:ktor-server-host-common:$ktorVer"
         }
 
         object Firebase {
